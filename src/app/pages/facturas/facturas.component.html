@@ -1,0 +1,56 @@
+<app-dashboard></app-dashboard>
+
+<div class="container-fluid">
+    <div class="row">
+        <div *ngFor="let f of facturas; let i = index" class="col-lg-4 col-md-4 col-sm-12">
+            <div class="card animated bounceIn" style="width: 18rem;">
+                <div class="estado">{{ f.data.estado }}</div>
+                <img class="card-img-top" src="https://neat.cl/assets/img/newRequirements/Neat-color-01.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ f.data.producto }}</h5>
+                    <p class="card-text">{{ f.data.descripcion }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ f.data.precio | currency:'CLP' }}</li>
+                    <li class="list-group-item">{{ f.data.unidades }}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link btn btn-secondary btn-sm">Modificar</a>
+                    <button class="card-link btn btn-danger btn-sm" (click)="deleteFactura( f.codigo )">Eliminar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="fab" data-toggle="modal" data-target="#myModal"> + </div>
+
+    <!-- Modal -->
+    <div class="modal animated bounceInUp" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--End Modal-->
+
+
+</div>

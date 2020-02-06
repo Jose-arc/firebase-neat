@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../app/pages/login/login.component';
 import { RegistroComponent } from '../app/pages/registro/registro.component';
 import { DashboardComponent } from '../app/pages/dashboard/dashboard.component';
+import { FacturasComponent } from '../app/pages/facturas/facturas.component';
 
 //Guard
 import { AuthGuard } from '../app/guards/auth.guard';
@@ -13,6 +14,11 @@ const routes: Routes = [
   { 
     path: "home", 
     component: DashboardComponent, 
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "facturas", 
+    component: FacturasComponent, 
     canActivate: [AuthGuard]
   },
   { 

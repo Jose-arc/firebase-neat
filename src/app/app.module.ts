@@ -11,15 +11,18 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 //Firebase
 import { AngularFireModule } from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Conexion } from './providers/conexion/conexion';
+import { FacturasComponent } from './pages/facturas/facturas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistroComponent,
-    DashboardComponent
+    DashboardComponent,
+    FacturasComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { Conexion } from './providers/conexion/conexion';
     HttpClientModule,
     AngularFireModule.initializeApp( Conexion )
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

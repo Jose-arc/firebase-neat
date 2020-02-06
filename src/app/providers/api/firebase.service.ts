@@ -33,5 +33,11 @@ export class FirebaseService {
     return this.firestore.collection( 'factura' ).doc( codigo ).set( factura );
   }
 
+  //Eliminar Factura
+
+  deleteFactura( codigo: string ){
+    return this.firestore.collection( 'factura' ).doc( codigo ).delete();
+  }
+
 
 }
