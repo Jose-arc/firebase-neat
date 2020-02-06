@@ -1,0 +1,50 @@
+<div class="limiter animated fadeInLeft">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+            <form (ngSubmit)="onSubmit( f )" #f="ngForm" class="login100-form validate-form">
+                <span class="login100-form-title p-b-33">
+                    Registro
+                </span>
+
+                <span *ngIf="f.submitted && f.controls['name'].errors" class="text-danger animated fadeIn">Nombre es obligatorio</span>
+
+
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="name" [(ngModel)]="usuario.nombre" required minlength="2" placeholder="Nombre de usuario">
+
+                    <span class="focus-input100-1"></span>
+                    <span class="focus-input100-2"></span>
+                </div>
+
+                <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">Correo es obligatorio</span>
+
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="email" [(ngModel)]="usuario.email" required email placeholder="Correo">
+
+                    <span class="focus-input100-1"></span>
+                    <span class="focus-input100-2"></span>
+                </div>
+
+                <span *ngIf="f.submitted && f.controls['pass'].errors" class="text-danger animated fadeIn">Al menos 6 letras</span>
+
+                <div class="wrap-input100 rs1 validate-input">
+                    <input class="input100" type="password" name="pass" [(ngModel)]="usuario.password" minlength="6" required placeholder="Password">
+                    <span class="focus-input100-1"></span>
+                    <span class="focus-input100-2"></span>
+                </div>
+
+                <div class="container-login100-form-btn m-t-20">
+                    <button class="login100-form-btn">
+                        Crear cuenta
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <a [routerLink]="['/login']" class="txt2 hov1">
+                        Ya tengo cuenta!
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
