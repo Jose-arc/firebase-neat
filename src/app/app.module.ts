@@ -9,6 +9,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
+//Firebase
+import { AngularFireModule } from '@angular/fire';
+
+import { Conexion } from './providers/conexion/conexion';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +25,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp( Conexion )
   ],
   providers: [],
   bootstrap: [AppComponent]

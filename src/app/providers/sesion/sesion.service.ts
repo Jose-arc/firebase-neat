@@ -4,14 +4,16 @@ import { HttpClient } from '@angular/common/http';
 import { UsuarioModel } from '../../modelos/usuario.models';
 import { map } from 'rxjs/operators';
 
+import { Conexion, UrlConexion } from '../conexion/conexion';
+
 @Injectable({
   providedIn: 'root'
 })
 export class SesionService {
 
-  private url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty';
+  private url : string;
   
-  private apikey = 'AIzaSyC3QKWc30IL2L0vhlYNDvQXTT3JKl8LRq4';
+  private apikey : string;
 
    // Crear nuevo usuario
   // https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=[API_KEY]
@@ -23,6 +25,9 @@ export class SesionService {
   userToken: any;
 
   constructor(private http : HttpClient) {
+    
+    this.apikey = Conexion.apiKey;
+    this.url = UrlConexion.url;
     
     this.leerToken();
 
