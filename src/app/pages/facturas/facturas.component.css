@@ -29,9 +29,14 @@
     position: fixed;
     right: 50px;
     bottom: 50px;
+    cursor: pointer;
 }
 
 .fab:hover {
     box-shadow: 0 6px 14px 0 #666;
     transform: scale(1.05);
+}
+
+label {
+    padding: 0px 10px 0px 0px;
 }

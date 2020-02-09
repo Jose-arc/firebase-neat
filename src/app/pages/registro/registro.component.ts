@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UtilsService } from '../../providers/utils/utils.service';
 import { SesionService } from '../../providers/sesion/sesion.service';
 import Swal from 'sweetalert2';
+import { LocalstorageService } from '../../providers/localstorage/localstorage.service';
 
 @Component({
   selector: 'app-registro',
@@ -18,7 +19,8 @@ export class RegistroComponent implements OnInit {
 
   constructor(private sesion : SesionService,
               private router : Router,
-              private utils : UtilsService ) { }
+              private utils : UtilsService,
+              private localstorage : LocalstorageService ) { }
 
   ngOnInit() {
 
@@ -40,7 +42,7 @@ export class RegistroComponent implements OnInit {
         Swal.close();
 
         if (this.recordarme) {
-          this.utils.addLocalStorage('email',this.usuario.email);
+          localStorage.setItem('email',this.usuario.email);
         }
 
         this.router.navigateByUrl('/login');

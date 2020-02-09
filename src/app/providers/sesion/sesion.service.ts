@@ -103,6 +103,9 @@ export class SesionService {
   cerrarSesion(){
 
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('factura');
+    localStorage.removeItem('showmodal');
     
   }
 
@@ -115,5 +118,7 @@ export class SesionService {
     }
 
   }
+
+  
 
 }

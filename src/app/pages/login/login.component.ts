@@ -5,6 +5,7 @@ import { SesionService } from '../../providers/sesion/sesion.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UtilsService } from '../../providers/utils/utils.service';
+import { FirebaseService } from '../../providers/api/firebase.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private utils : UtilsService,
     private sesion : SesionService,
-    private router : Router
+    private router : Router,
+    private firebase : FirebaseService
     ) { }
 
   ngOnInit() {
@@ -38,11 +40,57 @@ export class LoginComponent implements OnInit {
 
     this.sesion.login( this.usuario ).subscribe(
       resp =>{
-        console.log(resp);
 
-        Swal.close();
-        localStorage.setItem('email', this.usuario.email);
-        this.router.navigateByUrl('/home');
+        // console.log(resp['localId']);
+
+        let localId = resp['localId'];
+        let email = this.usuario.email;
+
+        //Verificacion de usuario
+        this.firebase.getUser( localId ).get()
+        .then( query => {
+
+          if ( query.empty ) {
+            console.log( "Primera autentificacion" );
+            // ---Logica de añadir a firebase para el message---
+
+            let data = {
+              localid : localId,
+              email : email
+            }
+
+            this.firebase.addUser( data ).then(( resp )=>{
+
+              localStorage.setItem('email', email);
+              localStorage.setItem('modal','true');
+
+              this.router.navigateByUrl('/facturas');
+
+            })
+            .catch( function( err ){
+              console.log(err);
+            });
+
+            //End
+          }
+
+          query.forEach( (res) => {
+            // console.log( res.data());
+            
+            Swal.close();
+            localStorage.setItem('email', email);
+            this.router.navigateByUrl('/facturas');
+
+          });
+        })
+        .catch( function( err ) {
+          console.log(err);
+        });
+        //End
+
+        // Swal.close();
+        // localStorage.setItem('email', email);
+        // this.router.navigateByUrl('/facturas');
 
       },
       (err) =>{

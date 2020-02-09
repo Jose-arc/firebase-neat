@@ -2,10 +2,10 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div *ngFor="let f of facturas; let i = index" class="col-lg-4 col-md-4 col-sm-12">
+        <div *ngFor="let f of facturas; let i = index" class="col-lg-3 col-md-8 col-sm-12">
             <div class="card animated bounceIn" style="width: 18rem;">
                 <div class="estado">{{ f.data.estado }}</div>
-                <img class="card-img-top" src="https://neat.cl/assets/img/newRequirements/Neat-color-01.png" alt="Card image cap">
+                <img class="card-img-top" src="http://placehold.it/350x350" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ f.data.producto }}</h5>
                     <p class="card-text">{{ f.data.descripcion }}</p>
@@ -15,7 +15,7 @@
                     <li class="list-group-item">{{ f.data.unidades }}</li>
                 </ul>
                 <div class="card-body">
-                    <a href="#" class="card-link btn btn-secondary btn-sm">Modificar</a>
+                    <a data-toggle="modal" data-target="#myModal" class="card-link btn btn-secondary btn-sm" (click)="showFactura( f.codigo )">Modificar</a>
                     <button class="card-link btn btn-danger btn-sm" (click)="deleteFactura( f.codigo )">Eliminar</button>
                 </div>
             </div>
@@ -24,27 +24,96 @@
     </div>
 
 
-    <div class="fab" data-toggle="modal" data-target="#myModal"> + </div>
+    <div class="fab" data-toggle="modal" data-target="#myModal" (click)="changeModo( 1, 0 )"> + </div>
 
-    <!-- Modal -->
+    <!-- Modal Añadir-->
     <div class="modal animated bounceInUp" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">Añadir Factura</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
-                <!-- Modal body -->
                 <div class="modal-body">
-                    Modal body..
+
+                    <form (ngSubmit)="onSubmit( f )" #f="ngForm">
+                        <div class="form-group">
+                            <label for="inputProducto">Producto</label>
+
+                            <span *ngIf="f.submitted && f.controls['producto'].errors" class="badge badge-danger animated fadeIn">Producto es obligatorio</span>
+
+                            <input type="text" class="form-control" name="producto" [(ngModel)]="factura.producto" id="inputProducto" required>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputUnidad">Unidades</label>
+
+                            <span *ngIf="f.submitted && f.controls['unidad'].errors" class="badge badge-danger animated fadeIn">Unidad es obligatorio</span>
+
+                            <input type="number" class="form-control" name="unidad" [(ngModel)]="factura.unidades" id="inputUnidad" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputKilos">Kilos</label>
+
+                            <span *ngIf="f.submitted && f.controls['kilos'].errors" class="badge badge-danger animated fadeIn">Kilos es obligatorio</span>
+
+                            <input type="number" class="form-control" name="kilos" [(ngModel)]="factura.kilos" id="inputKilos" required>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPrecio">Precio</label>
+
+                            <span *ngIf="f.submitted && f.controls['precio'].errors" class="badge badge-danger animated fadeIn">Precio es obligatorio</span>
+
+                            <input type="number" class="form-control" name="precio" [(ngModel)]="factura.precio" id="inputPrecio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescripcion">Descripcion</label>
+
+                            <span *ngIf="f.submitted && f.controls['desc'].errors" class="badge badge-danger animated fadeIn">Descripcion es obligatorio</span>
+
+                            <textarea class="form-control" id="inputDescripcion" name="desc" [(ngModel)]="factura.descripcion" rows="3" required></textarea>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPrecio">Estado</label>
+
+                            <span *ngIf="f.submitted && f.controls['estado'].errors" class="badge badge-danger animated fadeIn">Estado es obligatorio</span>
+
+                            <select class="custom-select mr-sm-2" [(ngModel)]="factura.estado" id="cboEstado" name="estado">
+                                <option value="nuevo">Nuevo</option>
+                                <option value="semi-nuevo">Semi Nuevo</option>
+                                <option value="usado">Usado</option>
+                              </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+
                 </div>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    <!--End Modal-->
+
+    <!-- Modal Modificar-->
+    <div class="modal animated bounceInUp" id="ModalUpdate">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Modificar Factura</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+
+
                 </div>
 
             </div>

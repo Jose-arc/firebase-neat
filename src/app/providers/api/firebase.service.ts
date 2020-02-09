@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 // import { Observable } from 'rxjs';
 
-import { Factura } from '../../modelos/factura.models';
+import { FacturaModel } from '../../modelos/factura.models';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class FirebaseService {
   
   //Añadir Factura  
 
-  addFactura( factura : Factura ){
+  addFactura( factura : FacturaModel ){
     return this.firestore.collection( 'factura' ).add( factura );
   }
 
@@ -29,7 +29,7 @@ export class FirebaseService {
   }
 
   //Actualizar Factura
-  updateFactura( codigo : string , factura : Factura ){
+  updateFactura( codigo : string , factura : FacturaModel ){
     return this.firestore.collection( 'factura' ).doc( codigo ).set( factura );
   }
 
@@ -39,5 +39,13 @@ export class FirebaseService {
     return this.firestore.collection( 'factura' ).doc( codigo ).delete();
   }
 
+  //Verificacion de usuario
+  addUser( usuario: { localid: string, email: string } ){
+    return this.firestore.collection( 'user' ).add( usuario );
+  }
+
+  getUser( localid: string ){
+    return this.firestore.collection( 'user' ).ref.where( 'localid', '==', localid );
+  }
 
 }
