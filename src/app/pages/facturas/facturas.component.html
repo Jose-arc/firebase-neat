@@ -1,8 +1,9 @@
 <app-dashboard></app-dashboard>
 
 <div class="container-fluid">
+
     <div class="row">
-        <div *ngFor="let f of facturas; let i = index" class="col-lg-3 col-md-8 col-sm-12">
+        <div *ngFor="let f of facturas; let i = index" class="col-lg-3 col-md-8 col-sm-12 cards-margin">
             <div class="card animated bounceIn" style="width: 18rem;">
                 <div class="estado">{{ f.data.estado }}</div>
                 <img class="card-img-top" src="http://placehold.it/350x350" alt="Card image cap">

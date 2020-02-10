@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 // import { Observable } from 'rxjs';
 
 import { FacturaModel } from '../../modelos/factura.models';
@@ -10,7 +11,8 @@ import { FacturaModel } from '../../modelos/factura.models';
 })
 export class FirebaseService {
 
-  constructor( private firestore : AngularFirestore ){}
+  constructor( private firestore : AngularFirestore,
+               private storage : AngularFireStorage  ){}
   
   //Añadir Factura  
 

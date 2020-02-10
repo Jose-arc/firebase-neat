@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 import { LocalstorageService } from '../../providers/localstorage/localstorage.service';
 
-
 @Component({
   selector: 'app-facturas',
   templateUrl: './facturas.component.html',
@@ -45,7 +44,7 @@ export class FacturasComponent implements OnInit {
 
     this.firebase.getFacturas().subscribe(
       (resp) =>{
-        
+
         this.facturas = [];
 
         resp.forEach(( FacturaData : any ) =>{
@@ -57,16 +56,24 @@ export class FacturasComponent implements OnInit {
           Swal.close();
           this.showModal();
 
+
         });
       },
       (err) =>{
-        this.utils.getMessage(err,"error","Facturas");
-      }
-    )
+
+        Swal.close();
+        console.log(err);
+        
+        // this.utils.getMessage(err,"error","Facturas");
+
+      });
+
+      Swal.close();
+      this.showModal();
   }
 
   deleteFactura(codigo){
-    this.firebase.deleteFactura( codigo ).then( () =>{
+    this.firebase.deleteFactura( codigo ).then(() =>{
       
       this.utils.getMessage("Producto Eliminado","success","Factura");
 
@@ -104,6 +111,11 @@ export class FacturasComponent implements OnInit {
     this.firebase.addFactura( data ).then(() =>{
 
       this.utils.getMessage("Se añadio correctamente","success","Factura");
+
+      //Generar PDF de respaldo
+      this.utils.generarPDF( data );
+      //end
+
       Swal.close();
 
     },
