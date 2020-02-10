@@ -23,8 +23,8 @@ export class FacturasComponent implements OnInit {
   email : any;
 
   constructor( private firebase : FirebaseService,
-                private utils : UtilsService,
-                private localstorage : LocalstorageService ) { 
+                private utils : UtilsService
+              ) { 
 
   this.factura = new FacturaModel("","","","","","");
 
@@ -106,15 +106,22 @@ export class FacturasComponent implements OnInit {
 
     // console.log(data);
 
+    //Generar PDF de respaldo
+    this.utils.generarPDF( data );
+    //end
+
     if (this.modo === 1) {
 
     this.firebase.addFactura( data ).then(() =>{
 
-      this.utils.getMessage("Se añadio correctamente","success","Factura");
+      //Elimina el archivo pdf
+      this.utils.updatePdf( data['url'] );
 
-      //Generar PDF de respaldo
+
+      //Genera nuevamente el Archivo pdf con nuevos campos
       this.utils.generarPDF( data );
-      //end
+
+      this.utils.getMessage("Se añadio correctamente","success","Factura");
 
       Swal.close();
 

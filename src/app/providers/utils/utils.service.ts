@@ -56,7 +56,7 @@ export class UtilsService {
     for(var key in data){
          var temp = [data[key]];
          rows.push(temp);
-         console.log(temp,"temp");
+         //console.log(temp,"temp");
        }
 
 
@@ -67,6 +67,9 @@ export class UtilsService {
 
     const nomPdf = Math.random().toString(30).substring(2);
     const ruta = `pdf_factura/${ nomPdf }`;
+
+    //Añadir ruta del archivo al ojeto factura
+    data.url = nomPdf;
 
     
     //firebase soporta archivos blob o file 
@@ -103,9 +106,48 @@ export class UtilsService {
       
       function(){
         upload.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-          return  console.log(downloadURL);
+          //console.log(downloadURL);
         });
       });
+
+  }
+
+  downloadPdf( nombre : any ){
+    
+    var storageRef = this.firebase.storage.ref();
+    
+    storageRef.child( 'pdf_factura/'+ nombre ).getDownloadURL().then( function( url ){
+
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function(event) {
+      var blob = xhr.response;
+      };
+      xhr.open('GET', url);
+      xhr.send();
+
+      window.open( url , '_blank');
+
+    }).catch(function(err){
+
+      console.log("No se pudo conseguir la ruta " + err);
+
+    });
+
+  }
+
+  updatePdf( nombre: any ){
+
+    var storageRef = this.firebase.storage.ref();
+    storageRef.child( 'pdf_factura/' + nombre );
+
+    //Eliminar Pdf de respaldo
+    
+    storageRef.delete().then(function() {
+      console.log('Se modifico correctamente el pdf!!');
+    }).catch(function(error) {
+      console.log(error);
+    });
 
   }
 

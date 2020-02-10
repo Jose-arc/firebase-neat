@@ -31,8 +31,8 @@
                             "node_modules/jquery/dist/jquery.min.js",
                             "node_modules/popper.js/dist/popper.min.js",
                             "node_modules/bootstrap/dist/js/bootstrap.min.js",
-                            "../node_modules/jspdf/dist/jspdf.min.js",
-                            "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
+                            "node_modules/jspdf/dist/jspdf.min.js",
+                            "node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
                         ]
                     },
                     "configurations": {
