@@ -59,11 +59,20 @@ export class UtilsService {
          //console.log(temp,"temp");
        }
 
-
     var doc = new jsPDF('p', 'pt');
+
+    //Header 
+    doc.setFontSize(20);
+    doc.setTextColor(40);
+    doc.setFontStyle('normal');
+    doc.text("Factura Neat - Test", 50, 22);
+    //End
+
+
     doc.autoTable(columns, rows);
     doc.setFontStyle('Bold');
     doc.setFontSize(14);
+
 
     const nomPdf = Math.random().toString(30).substring(2);
     const ruta = `pdf_factura/${ nomPdf }`;

@@ -4,7 +4,8 @@ import { UtilsService } from '../../providers/utils/utils.service';
 import { FacturaModel } from '../../modelos/factura.models';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
-import { LocalstorageService } from '../../providers/localstorage/localstorage.service';
+
+declare var jQuery:any;
 
 @Component({
   selector: 'app-facturas',
@@ -72,10 +73,14 @@ export class FacturasComponent implements OnInit {
       this.showModal();
   }
 
-  deleteFactura(codigo){
+  deleteFactura( codigo : any , url : any){
     this.firebase.deleteFactura( codigo ).then(() =>{
-      
+
       this.utils.getMessage("Producto Eliminado","success","Factura");
+
+      //Eliminar PDF
+      this.utils.updatePdf( url );
+      //End
 
     },
     (err) =>{
@@ -114,16 +119,17 @@ export class FacturasComponent implements OnInit {
 
     this.firebase.addFactura( data ).then(() =>{
 
-      //Elimina el archivo pdf
-      this.utils.updatePdf( data['url'] );
-
-
-      //Genera nuevamente el Archivo pdf con nuevos campos
-      this.utils.generarPDF( data );
+      this.limpiarForm();
 
       this.utils.getMessage("Se añadio correctamente","success","Factura");
 
       Swal.close();
+
+      //Elimina el archivo pdf
+      //this.utils.updatePdf( data['url'] );
+
+      //Genera nuevamente el Archivo pdf con nuevos campos
+      this.utils.generarPDF( data );
 
     },
     (err) =>{
@@ -135,7 +141,8 @@ export class FacturasComponent implements OnInit {
   }else if (this.modo === 2) {
     
       this.firebase.updateFactura( this.idFactura , data ).then(()=>{
-        
+
+        this.limpiarForm();
         console.log("se modifico correctamente");
 
       })
@@ -183,5 +190,13 @@ export class FacturasComponent implements OnInit {
     this.modo = mod;
     this.idFactura = code;
   }
+
+  limpiarForm(){
+    
+    jQuery("#myModal").modal("hide");
+    this.factura = new FacturaModel();
+
+  }
+
 
 }

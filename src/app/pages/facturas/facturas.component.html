@@ -17,7 +17,7 @@
                 </ul>
                 <div class="card-body">
                     <button data-toggle="modal" data-target="#myModal" class="card-link btn btn-secondary btn-sm" (click)="showFactura( f.codigo )">Modificar</button>
-                    <button class="card-link btn btn-danger btn-sm" (click)="deleteFactura( f.codigo )">Eliminar</button>
+                    <button class="card-link btn btn-danger btn-sm" (click)="deleteFactura( f.codigo, f.data.url )">Eliminar</button>
                     <button class="card-link btn btn-primary btn-sm" (click)="utils.downloadPdf( f.data.url )"><i class="fa fa-download" aria-hidden="true"></i></button>
                 </div>
             </div>
@@ -29,7 +29,7 @@
     <div class="fab" data-toggle="modal" data-target="#myModal" (click)="changeModo( 1, 0 )"> + </div>
 
     <!-- Modal Añadir-->
-    <div class="modal animated bounceInUp" id="myModal">
+    <div class="modal fade" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
 

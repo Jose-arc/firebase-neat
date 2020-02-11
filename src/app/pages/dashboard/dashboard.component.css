@@ -15,14 +15,17 @@ nav {
     height: 80px;
     width: 100%;
     margin: 0px 0px 40px 0px;
+    position: fixed;
+    z-index: 1000;
 }
 
 label.logo {
     color: #fff;
-    font-size: 35px;
+    font-size: 16px;
     line-height: 80px;
     padding: 0 100px;
     font-weight: bold;
+    transition: all .5s;
 }
 
 nav ul {
@@ -42,6 +45,11 @@ nav ul li a {
     font-size: 17px;
     text-transform: uppercase;
     padding: 7px 13px;
+}
+
+.logo-img {
+    width: 160px;
+    margin: 0px 0px 0px 0px;
 }
 
 .logout {
@@ -74,8 +82,12 @@ a:hover {
 
 @media (max-width: 952px) {
     label.logo {
-        font-size: 30px;
-        padding-left: 50px;
+        font-size: 14px;
+        padding-left: 30px;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+        transition: all .5s;
     }
     nav ul li a {
         font-size: 16px;
