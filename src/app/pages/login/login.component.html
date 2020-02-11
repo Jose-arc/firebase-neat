@@ -6,7 +6,7 @@
                     Login
                 </span>
 
-                <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">Correo es obligatorio</span>
+                <span *ngIf="f.submitted && f.controls['email'].errors" class="badge badge-danger animated fadeIn">Correo es obligatorio</span>
 
                 <div class="wrap-input100 validate-input">
                     <input class="input100" type="text" name="email" [(ngModel)]="usuario.email" required placeholder="Email">
@@ -14,7 +14,7 @@
                     <span class="focus-input100-2"></span>
                 </div>
 
-                <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">Password es obligatorio</span>
+                <span *ngIf="f.submitted && f.controls['password'].errors" class="badge badge-danger animated fadeIn">Password es obligatorio</span>
 
                 <div class="wrap-input100 rs1 validate-input">
                     <input class="input100" type="password" name="password" [(ngModel)]="usuario.password" required placeholder="Password">

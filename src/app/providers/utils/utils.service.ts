@@ -52,12 +52,15 @@ export class UtilsService {
 
     var columns = ['Productos','Unidades','Kilos','Precio','Descripcion','Estado'];
     var rows = [];
+    var x = [];
 
     for(var key in data){
-         var temp = [data[key]];
-         rows.push(temp);
+      
+      var temp = [data[key]];
+      rows.push(temp);
          //console.log(temp,"temp");
        }
+    x.push( rows );
 
     var doc = new jsPDF('p', 'pt');
 
@@ -69,7 +72,7 @@ export class UtilsService {
     //End
 
 
-    doc.autoTable(columns, rows);
+    doc.autoTable(columns, x);
     doc.setFontStyle('Bold');
     doc.setFontSize(14);
 

@@ -3,22 +3,47 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div *ngFor="let f of facturas; let i = index" class="col-lg-4 col-md-6 col-sm-12 cards-margin">
-            <div class="card card-responsive animated bounceIn" style="width: 18rem;">
-                <div class="estado">{{ f.data.estado }}</div>
-                <img class="card-img-top" src="http://placehold.it/350x350" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{ f.data.producto }}</h5>
-                    <p class="card-text">{{ f.data.descripcion }}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{ f.data.precio | currency:'CLP' }}</li>
-                    <li class="list-group-item">Unidades: {{ f.data.unidades }}</li>
-                </ul>
-                <div class="card-body">
-                    <button data-toggle="modal" data-target="#myModal" class="card-link btn btn-secondary btn-sm" (click)="showFactura( f.codigo )">Modificar</button>
-                    <button class="card-link btn btn-danger btn-sm" (click)="deleteFactura( f.codigo, f.data.url )">Eliminar</button>
-                    <button class="card-link btn btn-primary btn-sm" (click)="utils.downloadPdf( f.data.url )"><i class="fa fa-download" aria-hidden="true"></i></button>
+        <div *ngFor="let f of facturas; let i = index" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 cards-margin animated bounceIn">
+            <div class="tile">
+                <div class="wrapper">
+                    <div class="header">{{ f.data.producto }}</div>
+
+                    <div class="descripcion">
+
+                        <p>{{ f.data.descripcion }}</p>
+
+                    </div>
+
+                    <div class="detalles">
+                        <div>
+                            <strong>PRECIO</strong> {{ f.data.precio | currency:'CLP' }}
+                        </div>
+                        <div>
+                            <strong>KILOS</strong> {{ f.data.kilos }} Kg
+                        </div>
+                        <div>
+                            <strong>ESTADO</strong> {{ f.data.estado }}
+                        </div>
+                    </div>
+
+                    <div class="detalles">
+                        <div>
+                            <strong>PRODUCTO</strong> {{ f.data.producto }}
+                        </div>
+                        <div>
+                            <strong>UNIDADES</strong> {{ f.data.unidades }}
+                        </div>
+                        <div>
+                            <strong>SKU FILE</strong> {{ f.data.url }}
+                        </div>
+
+                    </div>
+
+                    <div class="footer">
+                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal" (click)="showFactura( f.codigo )">Modificar</button>
+                        <button class="btn btn-sm btn-primary" (click)="utils.downloadPdf( f.data.url )"> Ver más</button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteFactura( f.codigo, f.data.url )"> Eliminar </button>
+                    </div>
                 </div>
             </div>
         </div>

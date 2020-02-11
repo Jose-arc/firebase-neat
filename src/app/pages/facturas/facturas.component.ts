@@ -79,7 +79,7 @@ export class FacturasComponent implements OnInit {
       this.utils.getMessage("Producto Eliminado","success","Factura");
 
       //Eliminar PDF
-      this.utils.updatePdf( url );
+      //this.utils.updatePdf( url );
       //End
 
     },
